@@ -4,9 +4,12 @@ import hu.ivgraai.gitstats.reader.excel.ExcelExporter;
 import hu.ivgraai.gitstats.reader.excel.ExportRow;
 import hu.ivgraai.gitstats.reader.excel.ISheet;
 import hu.ivgraai.gitstats.reader.excel.IWorkbook;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,11 +42,14 @@ public class Main {
 
     public static void exportDatas(IWorkbook workbook, String sheetName, String pathname, String filePrefix) throws FileNotFoundException {
         List<String> lines = new ArrayList<>();
-        File plotInput = new File(pathname + filePrefix + ".plot");
-        try (Scanner scanner = new Scanner(plotInput)) {
-            while (scanner.hasNextLine()) {
-                lines.add(scanner.nextLine());
-            }
+        try {
+        	BufferedReader br = new BufferedReader(new FileReader(pathname + filePrefix + ".plot"));
+        	String line;
+        	while ((line = br.readLine()) != null) {
+        		lines.add(line);
+        	}
+        } catch(Exception e) {
+        	
         }
 
         List<String> authors = new ArrayList<>();
