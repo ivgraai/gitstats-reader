@@ -58,7 +58,7 @@ class PoiSheet implements ISheet {
                 if (null == elements[j].value) {
                     cell.setCellValue("");
                 } else {
-                    if ((Long.class == elements[j].type) || (Double.class == elements[j].type)) {
+                    if ((Integer.class == elements[j].type) || (Long.class == elements[j].type) || (Double.class == elements[j].type)) {
                         try {
                             cell.setCellValue(Double.parseDouble(elements[j].value.toString()));
                         } catch (NumberFormatException e) {
